@@ -13,7 +13,6 @@ var simpleloader = (function() {
     setType(type);
 
     document.body.appendChild(loaderwrapper);
-    return loaderwrapper;
   }
 
   // get the loader type
@@ -45,14 +44,17 @@ var simpleloader = (function() {
     var loaderType = getType(type);
 
     if (loaderType == "ripple") {
-      for (var i = 0; i < 5; i++) {
+      var ripplewrapper = document.createElement("div");
+      ripplewrapper.classList.add("simple-loader");
+      ripplewrapper.classList.add("ripple-wrapper");
+      for (var i = 0; i < 3; i++) {
         var ripple = document.createElement("div");
-        ripple.classList.add("simple-loader");
         ripple.classList.add(loaderType);
         ripple.style.left = "calc(50% + " + (2.5 - 2.5 * i) + "em)";
         ripple.style.setProperty("--i", i);
-        loaderwrapper.appendChild(ripple);
+        ripplewrapper.appendChild(ripple);
       }
+      loaderwrapper.appendChild(ripplewrapper);
     } else if (loaderType == "square-wave") {
       var squarewrapper = document.createElement("div");
       squarewrapper.classList.add("simple-loader");
@@ -137,5 +139,5 @@ var simpleloader = (function() {
   };
 })();
 
-simpleloader.init("twin-spinner");
+simpleloader.init();
 simpleloader.show();
