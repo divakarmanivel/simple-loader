@@ -24,7 +24,8 @@ var simpleloader = (function() {
       type !== "spinner" &&
       type !== "bounceball" &&
       type !== "ripple" &&
-      type != "square-wave"
+      type != "square-wave" &&
+      type != "twin-spinner"
     ) {
       return "spinner";
     } else {
@@ -40,28 +41,44 @@ var simpleloader = (function() {
         element.remove();
       }
     }
-    if (getType(type) == "ripple") {
+
+    var loaderType = getType(type);
+
+    if (loaderType == "ripple") {
       for (var i = 0; i < 5; i++) {
-        var loader = document.createElement("div");
-        loader.classList.add("simple-loader");
-        loader.classList.add(getType(type));
-        loader.style.left = "calc(50% + " + (2.5 - 2.5 * i) + "em)";
-        loader.style.setProperty("--i", i);
-        loaderwrapper.appendChild(loader);
+        var ripple = document.createElement("div");
+        ripple.classList.add("simple-loader");
+        ripple.classList.add(loaderType);
+        ripple.style.left = "calc(50% + " + (2.5 - 2.5 * i) + "em)";
+        ripple.style.setProperty("--i", i);
+        loaderwrapper.appendChild(ripple);
       }
-    } else if (getType(type) == "square-wave") {
-      var loader = document.createElement("div");
-      loader.classList.add("simple-loader");
-      loader.classList.add(getType(type));
-      loaderwrapper.appendChild(loader);
+    } else if (loaderType == "square-wave") {
+      var squarewrapper = document.createElement("div");
+      squarewrapper.classList.add("simple-loader");
+      squarewrapper.classList.add(loaderType);
+      loaderwrapper.appendChild(squarewrapper);
       for (var i = 0; i < 9; i++) {
         var square = document.createElement("div");
-        loader.appendChild(square);
+        squarewrapper.appendChild(square);
       }
+    } else if (loaderType == "twin-spinner") {
+      var twinspinnerwrapper = document.createElement("div");
+      twinspinnerwrapper.classList.add("simple-loader");
+      var twinspinner = document.createElement("div");
+      twinspinner.classList.add("twin-spinner");
+      var loaderInner = document.createElement("div");
+      loaderInner.classList.add("twin-spinner-inner");
+      var loaderOuter = document.createElement("div");
+      loaderOuter.classList.add("twin-spinner-outer");
+      twinspinner.appendChild(loaderOuter);
+      twinspinner.appendChild(loaderInner);
+      twinspinnerwrapper.appendChild(twinspinner);
+      loaderwrapper.appendChild(twinspinnerwrapper);
     } else {
       var loader = document.createElement("div");
       loader.classList.add("simple-loader");
-      loader.classList.add(getType(type));
+      loader.classList.add(loaderType);
       loaderwrapper.appendChild(loader);
     }
   }
@@ -120,5 +137,5 @@ var simpleloader = (function() {
   };
 })();
 
-simpleloader.init("bounceball");
+simpleloader.init("twin-spinner");
 simpleloader.show();
