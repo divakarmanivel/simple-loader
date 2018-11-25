@@ -1,6 +1,6 @@
 # Simple Loader
 
-Create fantastic full-page loading screens using minimal effort.
+Create fantastic full-page loading screens using minimal effort. See the full [Demo](https://divakarmanivel.github.io/simple-loader/)
 
 # Setup
 
