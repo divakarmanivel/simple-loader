@@ -71,6 +71,7 @@ The default type if no type is specified is "spinner". Currently available types
 - bounceball
 - ripple
 - square-wave
+- twin-spinner
   
 More loader types will be added soon!
 
