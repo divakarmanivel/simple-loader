@@ -1,50 +1,118 @@
-var simpleloader = function () {
+var simpleloader = (function() {
+  var loaderwrapper;
 
-    // initialize the loader
-    function init(type) {
-        var loaderwrapper = document.createElement("div");
-        loaderwrapper.id = "simple-loader-wrapper";
+  // initialize the loader
+  function init(type) {
+    loaderwrapper = document.createElement("div");
+    loaderwrapper.id = "simple-loader-wrapper";
+    loaderwrapper.classList.add("simple-loader-wrapper");
 
+    if (getType(type) == "ripple") {
+      for (var i = 0; i < 5; i++) {
         var loader = document.createElement("div");
-        loader.id = "simple-loader";
-        loader.className = getType(type);
+        loader.classList.add("simple-loader");
+        loader.classList.add(getType(type));
+        loader.style.left = "calc(50% + " + (2.5 - 2.5 * i) + "em)";
+        loader.style.setProperty("--i", i);
         loaderwrapper.appendChild(loader);
-
-        document.body.appendChild(loaderwrapper);
+      }
+    } else if (getType(type) == "square-wave") {
+      var loader = document.createElement("div");
+      loader.classList.add("simple-loader");
+      loader.classList.add(getType(type));
+      loaderwrapper.appendChild(loader);
+      for (var i = 0; i < 9; i++) {
+        var square = document.createElement("div");
+        loader.appendChild(square);
+      }
+    } else {
+      var loader = document.createElement("div");
+      loader.classList.add("simple-loader");
+      loader.classList.add(getType(type));
+      loaderwrapper.appendChild(loader);
     }
 
-    // get the loader type
-    function getType(type) {
-        if (type === "" || type === undefined || type === null) {
-            return "spinner";
-        } else if (type !== "spinner") {
-            return "spinner";
-        } else {
-            return type;
-        }
-    }
+    document.body.appendChild(loaderwrapper);
+    return loaderwrapper;
+  }
 
-    // set the loader type
-    function setType(type) {
-        document.getElementById("simple-loader").className = getType(type);
+  // get the loader type
+  function getType(type) {
+    if (type === "" || type === undefined || type === null) {
+      return "spinner";
+    } else if (
+      type !== "spinner" &&
+      type !== "bounceball" &&
+      type !== "ripple" &&
+      type != "square-wave"
+    ) {
+      return "spinner";
+    } else {
+      return type;
     }
+  }
 
-    // show the spinner
-    function show() {
-        document.getElementById("simple-loader-wrapper").setAttribute("style", "display: block;");
+  // set the loader type
+  function setType(type) {
+    loaderwrapper.className = getType(type);
+  }
+
+  // set the width of loader
+  function setWidth(width) {
+    loaderwrapper.style.width = width;
+  }
+
+  // set the height of loader
+  function setHeight(height) {
+    loaderwrapper.style.height = height;
+  }
+
+  // attach loader to element
+  function appendToId(element) {
+    if (loaderwrapper !== null) {
+      document.getElementById(element).appendChild(loaderwrapper);
     }
+  }
 
-    // hide the spinner
-    function hide() {
-        document.getElementById("simple-loader-wrapper").setAttribute("style", "display: none;");
+  // attach loader to class
+  function appendToClass(className, loader) {
+    NodeList.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
+    HTMLCollection.prototype[Symbol.iterator] =
+      Array.prototype[Symbol.iterator];
+    var elements = document.getElementsByClassName(className);
+    if (elements.length > 0) {
+      let count = 0;
+      for (let element of elements) {
+        var clone = loader.cloneNode(true);
+        clone.id = "simple-loader-wrapper" + count;
+        element.appendChild(clone);
+        count++;
+      }
+      loader.remove();
     }
+  }
 
-    // reveal all things private by assigning public pointers
-    return {
-        init: init,
-        show: show,
-        hide: hide,
-        type: setType
-    };
-}();
-simpleloader.init();
+  // show the loader
+  function show() {
+    loaderwrapper.setAttribute("style", "display: block;");
+  }
+
+  // hide the loader
+  function hide() {
+    loaderwrapper.setAttribute("style", "display: none;");
+  }
+
+  // reveal all things private by assigning public pointers
+  return {
+    init: init,
+    show: show,
+    hide: hide,
+    type: setType
+    // width: setWidth,
+    // height: setHeight,
+    // appendToId: appendToId
+  };
+})();
+
+simpleloader.init("square-wave");
+simpleloader.show();
