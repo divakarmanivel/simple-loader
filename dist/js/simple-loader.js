@@ -6,6 +6,7 @@ var simpleloader = function () {
         loaderwrapper.id = "simple-loader-wrapper";
 
         var loader = document.createElement("div");
+        loader.id = "simple-loader";
         loader.className = getType(type);
         loaderwrapper.appendChild(loader);
 
@@ -16,9 +17,16 @@ var simpleloader = function () {
     function getType(type) {
         if (type === "" || type === undefined || type === null) {
             return "spinner";
+        } else if (type !== "spinner") {
+            return "spinner";
         } else {
             return type;
         }
+    }
+
+    // set the loader type
+    function setType(type) {
+        document.getElementById("simple-loader").className = getType(type);
     }
 
     // show the spinner
@@ -35,7 +43,8 @@ var simpleloader = function () {
     return {
         init: init,
         show: show,
-        hide: hide
+        hide: hide,
+        type: setType
     };
 }();
 simpleloader.init();
