@@ -1,6 +1,6 @@
 # Simple Loader
 
-Create fantastic loading screens using minimal effort.
+Create fantastic full-page loading screens using minimal effort.
 
 # Setup
 
