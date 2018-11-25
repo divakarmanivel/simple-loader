@@ -1,6 +1,6 @@
 # Simple Loader
 
-Create fantastic loading screens using minimal effort.
+Create fantastic full-page loading screens using minimal effort.
 
 # Setup
 
@@ -66,7 +66,13 @@ To set the loader type add this line in your js file:
     simpleloader.type = "spinner";
 ```
 
-  The default type is spinner if no type is specified. More loader types will be added soon!
+The default type if no type is specified is "spinner". Currently available types are:
+- spinner
+- bounceball
+- ripple
+- square-wave
+  
+More loader types will be added soon!
 
 # Contribution
 
