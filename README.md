@@ -68,7 +68,13 @@ To set the loader type add this line in your js file:
 
   The default type is spinner if no type is specified. More loader types will be added soon!
 
+# Contribution
 
+I welcome pull requests from all! Thanks in advance! Visit our [Contributions](CONTRIBUTING.md) page for more information.
+
+# Code of Conduct
+
+Visit our [Code of Conduct](CODE_OF_CONDUCT.md) page for an overview on our ground rules.
 
  # License
 
