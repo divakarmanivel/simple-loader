@@ -1,3 +1,6 @@
+NodeList.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
+HTMLCollection.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
+
 var simpleloader = (function() {
   var loaderwrapper;
 
@@ -7,6 +10,36 @@ var simpleloader = (function() {
     loaderwrapper.id = "simple-loader-wrapper";
     loaderwrapper.classList.add("simple-loader-wrapper");
 
+    setType(type);
+
+    document.body.appendChild(loaderwrapper);
+    return loaderwrapper;
+  }
+
+  // get the loader type
+  function getType(type) {
+    if (type === "" || type === undefined || type === null) {
+      return "spinner";
+    } else if (
+      type !== "spinner" &&
+      type !== "bounceball" &&
+      type !== "ripple" &&
+      type != "square-wave"
+    ) {
+      return "spinner";
+    } else {
+      return type;
+    }
+  }
+
+  // set the loader type
+  function setType(type) {
+    var elements = document.getElementsByClassName("simple-loader");
+    if (elements.length > 0) {
+      for (let element of elements) {
+        element.remove();
+      }
+    }
     if (getType(type) == "ripple") {
       for (var i = 0; i < 5; i++) {
         var loader = document.createElement("div");
@@ -31,30 +64,6 @@ var simpleloader = (function() {
       loader.classList.add(getType(type));
       loaderwrapper.appendChild(loader);
     }
-
-    document.body.appendChild(loaderwrapper);
-    return loaderwrapper;
-  }
-
-  // get the loader type
-  function getType(type) {
-    if (type === "" || type === undefined || type === null) {
-      return "spinner";
-    } else if (
-      type !== "spinner" &&
-      type !== "bounceball" &&
-      type !== "ripple" &&
-      type != "square-wave"
-    ) {
-      return "spinner";
-    } else {
-      return type;
-    }
-  }
-
-  // set the loader type
-  function setType(type) {
-    loaderwrapper.className = getType(type);
   }
 
   // set the width of loader
@@ -76,9 +85,6 @@ var simpleloader = (function() {
 
   // attach loader to class
   function appendToClass(className, loader) {
-    NodeList.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
-    HTMLCollection.prototype[Symbol.iterator] =
-      Array.prototype[Symbol.iterator];
     var elements = document.getElementsByClassName(className);
     if (elements.length > 0) {
       let count = 0;
@@ -114,5 +120,5 @@ var simpleloader = (function() {
   };
 })();
 
-simpleloader.init("square-wave");
+simpleloader.init("bounceball");
 simpleloader.show();
