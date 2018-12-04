@@ -4,16 +4,17 @@ HTMLCollection.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
 var simpleloader = (function() {
   var loaderwrapper;
   var loaderType;
+  var loaderBackground = "#222";
+  var loaderForeground = "#F44336";
 
   // initialize the loader
   function init(type) {
     loaderwrapper = document.createElement("div");
     loaderwrapper.id = "simple-loader-wrapper";
     loaderwrapper.classList.add("simple-loader-wrapper");
+    document.body.appendChild(loaderwrapper);
 
     setType(type);
-
-    document.body.appendChild(loaderwrapper);
   }
 
   // get the loader type
@@ -95,12 +96,17 @@ var simpleloader = (function() {
       loader.classList.add(loaderType);
       loaderwrapper.appendChild(loader);
     }
+    setBackground(loaderBackground);
+    setForeground(loaderForeground);
   }
 
   // set the background of loader
   function setBackground(color) {
     if (/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color)) {
       loaderwrapper.style.background = color;
+      loaderBackground = color;
+    } else if (color == undefined) {
+      loaderwrapper.style.background = loaderBackground;
     }
   }
 
@@ -129,6 +135,9 @@ var simpleloader = (function() {
         var loader = document.getElementsByClassName("simple-loader")[0];
         loader.style.borderColor = color;
       }
+      loaderForeground = color;
+    } else if (color == undefined) {
+      setForeground(loaderForeground);
     }
   }
 

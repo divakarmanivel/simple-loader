@@ -27,7 +27,7 @@
 }
 
 .spinner {
-    border-top: 3px solid #fff;
+    border-top: 3px solid #F44336;
     border-right: 3px solid transparent;
     border-radius: 50%;
     -webkit-animation: rotation .8s linear infinite;
@@ -72,7 +72,7 @@
     width: 15px;
     height: 15px;
     border-radius: 50%;
-    background-color: #fbae17;
+    background-color: #F44336;
     -webkit-transform-origin: 50%;
     -ms-transform-origin: 50%;
     transform-origin: 50%;
@@ -135,7 +135,7 @@
 }
 
 .ripple {
-    border: 2px solid tomato;
+    border: 2px solid #F44336;
 }
 
 .ripple,
@@ -186,7 +186,7 @@
     display: inline-block;
     width: 100%;
     height: 100%;
-    background: tomato;
+    background: #F44336;
     -webkit-transform: scale(0);
     -ms-transform: scale(0);
     transform: scale(0);
@@ -276,7 +276,7 @@
 
 .twin-spinner-outer {
     position: absolute;
-    border: 4px solid #f50057;
+    border: 4px solid #F44336;
     border-left-color: transparent;
     border-bottom: 0;
     width: 100%;
@@ -288,7 +288,7 @@
 
 .twin-spinner-inner {
     position: absolute;
-    border: 4px solid #f50057;
+    border: 4px solid #F44336;
     border-radius: 50%;
     width: 40px;
     height: 40px;
