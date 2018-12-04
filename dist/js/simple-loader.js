@@ -198,4 +198,3 @@ var simpleloader = (function() {
 })();
 
 simpleloader.init();
-simpleloader.show();
