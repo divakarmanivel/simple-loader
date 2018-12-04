@@ -39,7 +39,7 @@ To hide the loader add this line in your js file:
     simpleloader.hide();
 ```
     
-For example, to show a loader in an XML request:
+For example, to show a loader while in a http request:
 
 ```javascript
     function getRequest(url){
