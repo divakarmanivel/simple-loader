@@ -3,6 +3,7 @@ HTMLCollection.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
 
 var simpleloader = (function() {
   var loaderwrapper;
+  var loaderType;
 
   // initialize the loader
   function init(type) {
@@ -41,7 +42,7 @@ var simpleloader = (function() {
       }
     }
 
-    var loaderType = getType(type);
+    loaderType = getType(type);
 
     if (loaderType == "ripple") {
       var ripplewrapper = document.createElement("div");
@@ -62,6 +63,7 @@ var simpleloader = (function() {
       loaderwrapper.appendChild(squarewrapper);
       for (var i = 0; i < 9; i++) {
         var square = document.createElement("div");
+        square.classList.add("square");
         squarewrapper.appendChild(square);
       }
     } else if (loaderType == "twin-spinner") {
@@ -71,17 +73,62 @@ var simpleloader = (function() {
       twinspinner.classList.add("twin-spinner");
       var loaderInner = document.createElement("div");
       loaderInner.classList.add("twin-spinner-inner");
+      loaderInner.id = "twin-spinner-inner";
       var loaderOuter = document.createElement("div");
       loaderOuter.classList.add("twin-spinner-outer");
+      loaderOuter.id = "twin-spinner-outer";
       twinspinner.appendChild(loaderOuter);
       twinspinner.appendChild(loaderInner);
       twinspinnerwrapper.appendChild(twinspinner);
       loaderwrapper.appendChild(twinspinnerwrapper);
+    } else if (loaderType == "bounceball") {
+      var bounceballwrapper = document.createElement("div");
+      bounceballwrapper.classList.add("simple-loader");
+      loaderwrapper.appendChild(bounceballwrapper);
+      var bounceball = document.createElement("div");
+      bounceball.classList.add("bounceball");
+      bounceball.id = "bounceball";
+      bounceballwrapper.appendChild(bounceball);
     } else {
       var loader = document.createElement("div");
       loader.classList.add("simple-loader");
       loader.classList.add(loaderType);
       loaderwrapper.appendChild(loader);
+    }
+  }
+
+  // set the background of loader
+  function setBackground(color) {
+    if (/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color)) {
+      loaderwrapper.style.background = color;
+    }
+  }
+
+  // set the foreground of loader
+  function setForeground(color) {
+    if (/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color)) {
+      if (loaderType == "bounceball") {
+        var bounceballloader = document.getElementById("bounceball");
+        bounceballloader.style.backgroundColor = color;
+      } else if (loaderType == "ripple") {
+        var rippleloader = document.getElementsByClassName("ripple");
+        for (var i = 0; i < 3; i++) {
+          rippleloader[i].style.borderColor = color;
+        }
+      } else if (loaderType == "square-wave") {
+        var squareloader = document.getElementsByClassName("square");
+        for (var i = 0; i < 9; i++) {
+          squareloader[i].style.backgroundColor = color;
+        }
+      } else if (loaderType == "twin-spinner") {
+        var loaderInner = document.getElementById("twin-spinner-inner");
+        loaderInner.style.borderColor = color;
+        var loaderOuter = document.getElementById("twin-spinner-outer");
+        loaderOuter.style.borderColor = color;
+      } else {
+        var loader = document.getElementsByClassName("simple-loader")[0];
+        loader.style.borderColor = color;
+      }
     }
   }
 
@@ -132,7 +179,9 @@ var simpleloader = (function() {
     init: init,
     show: show,
     hide: hide,
-    type: setType
+    type: setType,
+    background: setBackground,
+    foreground: setForeground
     // width: setWidth,
     // height: setHeight,
     // appendToId: appendToId

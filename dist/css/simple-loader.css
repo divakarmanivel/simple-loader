@@ -61,7 +61,7 @@
     }
 }
 
-.bounceball:before {
+.bounceball {
     position: absolute;
     content: '';
     display: block;
