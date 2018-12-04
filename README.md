@@ -63,7 +63,7 @@ For example, to show a loader in an XML request:
 To set the loader type add this line in your js file:
 
 ```javascript
-    simpleloader.type = "spinner";
+    simpleloader.type("spinner")
 ```
 
 The default type if no type is specified is "spinner". Currently available types are:
@@ -72,8 +72,20 @@ The default type if no type is specified is "spinner". Currently available types
 - ripple
 - square-wave
 - twin-spinner
-  
-More loader types will be added soon!
+
+To set the background color add this line in your js file:
+
+```javascript
+    simpleloader.background("#fff"); // 3-digit hexcode
+    simpleloader.background("#2196f3"); // 6-digit hexcode
+```
+
+To set the foreground color add this line in your js file:
+
+```javascript
+    simpleloader.foreground("#fff"); // 3-digit hexcode
+    simpleloader.foreground("#2196f3"); // 6-digit hexcode
+```
 
 # Contribution
 
