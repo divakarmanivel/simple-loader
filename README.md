@@ -1,3 +1,7 @@
+<p align="center">
+<img src="./simple.png" alt="Simple logo"/>
+</p>
+
 # Simple Loader
 
 Create fantastic full-page loading screens using minimal effort. See the full [Demo](https://divakarmanivel.github.io/simple-loader/)
